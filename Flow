@@ -1,0 +1,6 @@
+The datasets used were : 
+Bicubic upscaling to test real results
+HR to LR (divided into 8 bits)
+LR to SR (concat bits of a single image)
+Names of images name in numerical format for convenience of sorting images in order
+Can either store SR image locally or can share it to another pc via python socket
