@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- Title Page-->
+    <title>Send LR images</title>
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="static/css/send.css" rel="stylesheet" media="all">
+</head>
+
+<style>
+.wrapper{
+    width: 1000px;
+    height: 210px;
+}
+#slider4{
+    white-space: nowrap;
+    width:800px;
+    overflow: auto;
+}
+.slide-img{
+    background: #ccc;
+    height: 200px;
+    display: inline-block;
+    width: 100px;
+}
+img {
+    width: 200px;
+    border: 2px solid white;
+	}
+</style>
+
+<body class="bg-dark">
+    <div class="page-wrapper p-t-100 p-b-50">
+        <div class="wrapper wrapper--w900">
+            <div class="card card-6">
+                <div class="card-heading">
+                    <h2 class="title">Send Images</h2>
+                </div>
+                <div class="card-body">
+
+                    <form action="localclient" target="_blank">
+                        <div class="form-row">
+                            <div class="name">Send to (Enter IP)</div>
+                            <div class="value">
+                                <input class="input--style-6" value="{{ip}}" type="text" name="ipaddr">
+                            </div>
+                        </div>
+						<div class="form-row">
+                            <div class="name col-sm-6">Port No</div>
+                            <div class="value">
+                                <input class="input--style-6 col-sm-6" value="3000" type="text" name="portno">
+                            </div>
+                        </div>
+                       
+                        <div class="form-row">
+                            <div class="name">Username</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="Username" name="username">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="name">Message</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <textarea class="textarea--style-6" name="message" 
+                                    placeholder="Message to the receiver"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="wrapper">
+                                <div id="slider4" class="text-center">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            Total images : {{totimg}}&emsp;&emsp;Size : {{size}}
+                        </div>
+                        <script>
+                        {% for i in list %}
+                        var img = document.createElement("img");
+                        img.src = "{{lrpath}}{{i}}";
+                        img.class = "slide-img";
+                        var src = document.getElementById("slider4");
+                        src.appendChild(img);
+                        {% endfor %}
+                        </script>
+                <div class="card-footer">
+                    <button class="btn btn--radius-2 btn--blue-2" type="submit">Open Client</button>
+                </div>
+            </form>
+                    <div class="form-row">
+                    <button class="btn btn--radius-2 btn--blue-2" onclick="location.href='{% url 'listen' %}'" >Start Server</button>&emsp;
+                    <button class="btn btn--radius-2 btn--blue-2" onclick="location.href='{% url 'client' %}'" >Send Images</button>&emsp;
+                    <button class="btn btn--radius-2 btn--blue-2" onclick="location.href='{% url 'stop' %}'" >Stop Server</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

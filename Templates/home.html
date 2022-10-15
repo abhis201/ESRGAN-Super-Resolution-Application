@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!--Glyphicons -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css">
+
+    <link rel="stylesheet" type="text/css" href="static/css/style_new.css">
+
+<title>BE PROJECT </title>
+</head>
+
+<body style="background: #10202b;">
+
+<div class="frame" style="padding-top: 80px;padding-bottom: 80px;">
+<div class="container">
+
+    <div class="row" style="margin-bottom: 100px;">
+        <div class="dropdown col-md-3" style="padding-left:0;">
+            <button type="button" class="btn btn-lg btn-success outline view dropdown-toggle" data-toggle="dropdown">View</button>
+                <div class="dropdown-menu" style="margin-left:10px; margin-right:10px;">
+                    <a class="dropdown-item" id="lrbtn" target="_blank" title="" href="file:///home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/lr/" >LR</a>
+                    <a class="dropdown-item" id="hrbtn" target="_blank" title="" href="file:///home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/hr/" >HR</a>
+                    <a class="dropdown-item" id="srbtn" target="_blank" title="" href="file:///home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/sr/" >SR</a>
+                </div>
+        </div>
+
+
+        <!--script>
+        var lr = prompt("Enter LR path");
+        var hr = prompt("Enter HR path");
+        var sr = prompt("Enter SR path");
+        document.getElementById("lrbtn").href = "file:///"+lr;
+        document.getElementById("hrbtn").href = "file:///"+hr;
+        document.getElementById("srbtn").href = "file:///"+sr;
+
+        document.getElementById("lrbtn").title = lr;
+        document.getElementById("hrbtn").title = hr;
+        document.getElementById("srbtn").title = sr;
+
+        document.getElementById("lrhid").value = lr;
+        document.getElementById("hrhid").value = hr;
+        document.getElementById("srhid").value = sr;
+        </script-->
+
+        <div class="text-center col-md-6" >
+           <h2><a style="color:white;" title="Image Super Resolution : GAN">IMAGE ENHANCING UTILITY</a></h2>
+        </div>
+
+        <form class="text-right col-md-1" style="padding-right:0;" action="loadimg">
+                <input type="text" id="lrhid1" name="lrhid1" value="/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/lr/" hidden>
+                <input type="text" id="hrhid1" name="hrhid1" value="/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/hr/" hidden>
+                <input type="text" id="srhid1" name="srhid1" value="/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/sr/" hidden>
+                <button type="submit" class="btn btn-lg btn-success"><a>*</a></button>
+        </form>
+
+        <form class="text-right col-md-2" action="makelr">
+                <input type="text" id="lrhid" name="lrhid" value="/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/lr/" hidden>
+                <input type="text" id="hrhid" name="hrhid" value="/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/hr/" hidden>
+                <input type="text" id="srhid" name="srhid" value="/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/sr/" hidden>
+                <button type="submit" class="btn btn-lg btn-success">Construct LR</button>
+        </form>
+    </div>
+
+    <div class="row" style="margin-bottom:15px">
+        <div class="col-md-1">
+            <div class="row" style="padding-top:20%;">
+                <div class="col-md-12">
+                    <button type="button" class="text-left btn btn-warning outline" onclick="location.href='{% url 'prev' %}'" style="padding-top:10px;"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
+                </div>
+            </div>
+            <div class="row" style="padding-top:10%">
+                <p class="col-md-12" style="color:orange; margin-bottom:0; margin-top:10%;"><label id="imgno">{{imgno}}</label>/<label id="tot_img">{{totalimg}}</label></p>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="imageTable">
+                <div class="imageTable-header">
+                    <span class="heading">
+                        <h3>HR</h3>
+                    </span>
+                    <span class="image-content"><img src="{{imghr}}"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <div class="imageTable">
+                <div class="imageTable-header">
+                    <span class="heading">
+                        <h3>LR</h3>
+                    </span>
+                    <span class="image-content"><img style="width:128px;" src="{{imglr}}"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <div class="imageTable">
+                <div class="imageTable-header">
+                    <span class="heading">
+                        <h3>SFTGAN</h3>
+                    </span>
+                    <span class="image-content"><img src="{{imgsrS}}"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="imageTable">
+                <div class="imageTable-header">
+                    <span class="heading">
+                        <h3>BICUBIC</h3>
+                    </span>
+                    <span class="image-content"><img src="{{imgsrB}}"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="imageTable">
+                <div class="imageTable-header">
+                    <span class="heading">
+                        <h3>ESRGAN</h3>
+                    </span>
+                    <span class="image-content"><img src="{{imgsrE}}"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <div class="row" style="padding-top:20%;">
+                <div class="text-right col-md-12">
+                    <button type="button" class="btn btn-warning outline" onclick="location.href='{% url 'next' %}'" style="padding-top:10px;"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                </div>
+            </div>
+            <div class="row" style="padding-top:10%;">
+                <p class="text-right col-md-12" style="color:orange; margin-bottom:0; margin-top:10%;"><label id="img-no">{{imgno}}</label>/<label id="tot-img">{{totalimg}}</label></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin:0;">
+    <div class="col-md-1">
+        <div class="row">
+            <div class="text-right col-md-11" style="padding-top:70%;">
+                    <p class="text-hover" title="PSNR(Peak Singal to noise ration) is a comparision index of two images, here all the images are being compared with the HR(High Resolution) Image. Lower the PSNR value better the SR(Super Resolution) Algorithm"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></p>
+                </div>
+        </div>
+        <div class="row">
+            <div class="text-right col-md-11" style="padding-top:5%;">
+                    <p class="text-hover" title="SSIM(Structural Similarity Index) is a value which shows the similarity of the images to the HR(High Resolution) Image"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></p>
+                </div>
+        </div>
+    </div>
+
+    <table class="col-md-11 table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">GroundTruth</th>
+            <th scope="col">Low Res</th>
+          <th scope="col">SFTGAN   </th>
+          <th scope="col">BICUBIC    </th>
+          <th scope="col">ESRGAN   </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">PSNR</th>
+          <td>{{psnrlr}}</td>
+            <td>{{psnrsft}}</td>
+          <td>{{psnrbic}}</td>
+          <td>{{psnresr}}</td>
+        </tr>
+        <tr>
+          <th scope="row">SSIM</th>
+            <td>{{ssimlr}}</td>
+          <td>{{ssimsft}}</td>
+          <td>{{ssimbic}}</td>
+          <td>{{ssimesr}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    </div>
+
+    <div class="row" style="margin-top:20px;">
+        <div class="text-left col-md-1" style="padding-left:0;">
+        <button onclick="location.href='{% url 'applysr' %}'" class="btn btn-lg btn-danger outline sr">Start</button>
+        </div>
+
+        <div class="text-left col-md-6" style="padding-left:0;">
+          <button onclick="location.href='{% url 'nextpage' %}'" class='btn btn-lg btn-warning outline'>Save Locally</button>
+        </div>
+
+        <div class="text-right col-md-3">
+          <button onclick="location.href='{% url 'transfer' %}'" class='btn btn-lg btn-warning outline'>Share via Network</button>
+        </div>
+
+        <select class="text-right col-md-2 browser-default custom-select-lg">
+          <option value="ESRGAN" selected>ESRGAN</option>
+          <option value="BICUBIC">BICUBIC</option>
+          <option value="SFTGAN">SFTGAN</option>
+        </select>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<title>Save Locally</title>
+	
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+	<link rel="stylesheet" href= 
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> 
+	
+	<script src= 
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
+	</script> 
+	
+	<script src= 
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"> 
+	</script> 
+	
+	<script src= 
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"> 
+	</script> 
+	<style> 
+		.card { 
+			width: 23rem;
+			margin: 30px; 
+		} 
+		.image-grid-container { 
+			display: grid; 
+            width: auto;
+  			height:400px;
+  			overflow: auto;
+			
+			/* For 3 columns */ 
+			grid-template-columns: auto auto auto; 
+		} 
+		img { 
+			width: 114px;
+			border: 1px solid black;
+		}
+	</style>
+</head> 
+
+<body>
+
+
+<div class="container" id="imgcontainer">
+	<div class="row"> 
+    
+		<div class="card"> 
+        
+			<div id="addlr" class="image-grid-container" >
+
+				<script>
+				{% for i in list %}
+				var img = document.createElement("img");
+				img.src = "{{lrpath}}{{i}}";
+				var src = document.getElementById("addlr");
+				src.appendChild(img);
+				{% endfor %}
+				</script>
+
+			</div> 
+			<div class="card-body"> 
+				<h4 class="card-title"> 
+					LR
+				</h4> 
+				
+				<p class="card-text"> 
+					Low Resolution Images before applying Algorithm.
+				</p>
+				<div class="row">
+				<div class="text-left col-sm-5">
+				<a href="#" class="btn btn-primary"> 
+					LR FOLDER 
+				</a>
+				</div>
+				<div class="text-right col-sm-4">
+					{{count}} images
+				</div>
+				<div class="text-right col-sm-3">
+					{{sizelr}}
+				</div>
+				</div>
+			</div> 
+		</div> 
+
+<div class="card" style="width:10rem">
+			<div class="card-body"> 
+				<h4 class="card-title"> 
+					{{algorithm}}
+				</h4> 
+				
+				<p class="card-text"> 
+					PSNR<br>{{psnr}}
+				</p>
+
+				<p class="card-text">
+					SSIM<br>{{ssim}}
+				</p>
+
+			</div> 
+		</div>
+
+
+
+        <div class="card"> 
+			<div id="addsr" class="image-grid-container">
+				<script>
+				{% for i in listsr %}
+				var img = document.createElement("img");
+				img.src = "{{srpath}}/{{i}}";
+				var src = document.getElementById("addsr");
+				src.appendChild(img);
+				{% endfor %}
+				</script>
+			</div> 
+			<div class="card-body"> 
+				<h4 class="card-title"> 
+					HR
+				</h4> 
+				
+				<p class="card-text"> 
+					Super Resolution Images after applying Algorithm.
+				</p>
+				<div class="row">
+				<div class="text-left col-sm-5">
+				<a href="#" class="btn btn-primary"> 
+					SR FOLDER
+				</a>
+				</div>
+				<div class="text-right col-sm-4">
+					{{count}} images
+				</div>
+				<div class="text-right col-sm-3">
+					{{sizesr}}
+				</div>
+				</div>
+			</div> 
+		</div> 
+
+	</div> 
+
+</div> 
+    
+
+
+
+</body> 
+
+</html> 
