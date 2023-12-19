@@ -11,7 +11,6 @@ from collections import OrderedDict
 from Backend.scripts.calculate_PSNR_SSIM import *
 import torch
 from Backend.Bicubic.bicupscale import *
-from Backend.SFTGAN.pytorch_test.test_segmentation import *
 from Backend.SFTGAN.pytorch_test.test_sftgan import *
 import socket
 import shutil
