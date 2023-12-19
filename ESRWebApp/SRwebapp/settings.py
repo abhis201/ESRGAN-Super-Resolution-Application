@@ -123,4 +123,5 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'Backend'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static'),
+# Directory where 'collectstatic' will gather static files for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
