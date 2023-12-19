@@ -3,7 +3,7 @@ numpy==1.24.3
 opencv_python==4.8.1.78
 pandas==1.5.3
 Pillow==9.4.0
-skimage==0.0
+scikit-image==0.20.0
 torch==2.1.2
 torchvision==0.16.2
 tqdm==4.65.0
