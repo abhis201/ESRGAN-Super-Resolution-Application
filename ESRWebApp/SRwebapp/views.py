@@ -53,6 +53,8 @@ def loadimg(request):
     sr_bicubic_path = str(request.GET['srhid1'] + "sr_bicubic")
     sr_sftgan_path = str(request.GET['srhid1'] + "sr_sftgan")
 
+    current_working_directory = os.getcwd()
+    print("Current Working Directory:", current_working_directory)
     lrdir = os.listdir(lr_path)
     hrdir = os.listdir(hr_path)
     srdir_esrgan = os.listdir(sr_esrgan_path)
@@ -67,11 +69,11 @@ def loadimg(request):
 
     for index, lrimage_name in enumerate(lrdir):
         break;
-    lrimg = str("static/" + lr_path.split("/")[6] +"/"+ lr_path.split("/")[7] +"/"+ lr_path.split("/")[8] +"/"+ lr_path.split("/")[9] + "/" + lrimage_name)
+    lrimg = str("static/" + ("/".join(lr_path.split("/")[1:])) + "/" + lrimage_name)
 
     for index, hrimage_name in enumerate(hrdir):
         break;
-    hrimg = str("static/" + hr_path.split("/")[6] +"/"+ hr_path.split("/")[7] +"/"+ hr_path.split("/")[8] +"/"+ hr_path.split("/")[9] + "/" + hrimage_name)
+    hrimg = str("static/" + ("/".join(hr_path.split("/")[1:])) + "/" + hrimage_name)
 
     if len(os.listdir(sr_esrgan_path)and(os.listdir(sr_sftgan_path))and(os.listdir(sr_bicubic_path))) > 0:
         srres = 1
@@ -79,22 +81,19 @@ def loadimg(request):
     if srres==1:
         for index, srEimage_name in enumerate(srdir_esrgan):
             break;
-        srimgE = str("static/" + sr_esrgan_path.split("/")[6] +"/"+ sr_esrgan_path.split("/")[7] +"/"+
-                    sr_esrgan_path.split("/")[8] +"/"+ sr_esrgan_path.split("/")[9] +"/"+ sr_esrgan_path.split("/")[10] + "/" + srEimage_name)
+        srimgE = str("static/" + ("/".join(sr_esrgan_path.split("/")[1:])) + "/" + srEimage_name)
         srEimage_name = srEimage_name
 
 
         for index, srBimage_name in enumerate(srdir_bicubic):
             break;
-        srimgB = str("static/" + sr_bicubic_path.split("/")[6] +"/"+ sr_bicubic_path.split("/")[7] +"/"+
-                    sr_bicubic_path.split("/")[8] +"/"+ sr_bicubic_path.split("/")[9] +"/"+ sr_bicubic_path.split("/")[10] + "/" + srBimage_name)
+        srimgB = str("static/" + ("/".join(sr_bicubic_path.split("/")[1:])) + "/" + srBimage_name)
         srBimage_name = srBimage_name
 
 
         for index, srSimage_name in enumerate(srdir_sftgan):
             break;
-        srimgS = str("static/" + sr_sftgan_path.split("/")[6] +"/"+ sr_sftgan_path.split("/")[7] +"/"+
-                    sr_sftgan_path.split("/")[8] +"/"+ sr_sftgan_path.split("/")[9] +"/"+ sr_sftgan_path.split("/")[10] + "/" + srSimage_name)
+        srimgS = str("static/" + ("/".join(sr_sftgan_path.split("/")[1:])) + "/" + srSimage_name)
         srSimage_name = srSimage_name
 
         lrpsnr = 0 #calpsnr(lrimg, lr_path)
@@ -155,12 +154,12 @@ def previmg(request):
     for indexprev, lrimage_name in enumerate(lrdir):
         if(indexprev == (indeximg-1)):
             break;
-    lrimg = str("static/" + lr_path.split("/")[6] +"/"+ lr_path.split("/")[7] +"/"+ lr_path.split("/")[8] +"/"+ lr_path.split("/")[9] + "/" + lrimage_name)
+    lrimg = str("static/" + ("/".join(lr_path.split("/")[1:])) + "/" + lrimage_name)
 
     for indexprev, hrimage_name in enumerate(hrdir):
         if (indexprev == indeximg - 1):
             break;
-    hrimg = str("static/" + hr_path.split("/")[6] +"/"+ hr_path.split("/")[7] +"/"+ hr_path.split("/")[8] +"/"+ hr_path.split("/")[9] + "/" + hrimage_name)
+    hrimg = str("static/" + ("/".join(hr_path.split("/")[1:])) + "/" + hrimage_name)
 
     if len(os.listdir(sr_esrgan_path)and(os.listdir(sr_sftgan_path))and(os.listdir(sr_bicubic_path))) > 0:
         srres = 1
@@ -171,8 +170,7 @@ def previmg(request):
         for indexprev, srEimage_name in enumerate(srdir_esrgan):
             if (indexprev == indeximg - 1):
                 break;
-        srimgE = str("static/" + sr_esrgan_path.split("/")[6] + "/" + sr_esrgan_path.split("/")[7] + "/" +
-                     sr_esrgan_path.split("/")[8] + "/" + sr_esrgan_path.split("/")[9] +"/"+ sr_esrgan_path.split("/")[10] + "/" + srEimage_name)
+        srimgE = str("static/" + ("/".join(sr_esrgan_path.split("/")[1:])) + "/" + srEimage_name)
 
 
         srdir_bicubic = os.listdir(sr_bicubic_path)
@@ -180,8 +178,7 @@ def previmg(request):
         for indexprev, srBimage_name in enumerate(srdir_bicubic):
             if (indexprev == indeximg - 1):
                 break;
-        srimgB = str("static/" + sr_bicubic_path.split("/")[6] + "/" + sr_bicubic_path.split("/")[7] + "/" +
-                     sr_bicubic_path.split("/")[8] + "/" + sr_bicubic_path.split("/")[9] +"/"+ sr_bicubic_path.split("/")[10] + "/" + srBimage_name)
+        srimgB = str("static/" + ("/".join(sr_bicubic_path.split("/")[1:])) + "/" + srBimage_name)
 
 
         srdir_sftgan = os.listdir(sr_sftgan_path)
@@ -189,8 +186,7 @@ def previmg(request):
         for indexprev, srSimage_name in enumerate(srdir_sftgan):
             if (indexprev == indeximg - 1):
                 break;
-        srimgS = str("static/" + sr_sftgan_path.split("/")[6] + "/" + sr_sftgan_path.split("/")[7] + "/" +
-                     sr_sftgan_path.split("/")[8] + "/" + sr_sftgan_path.split("/")[9] +"/"+ sr_sftgan_path.split("/")[10] + "/" + srSimage_name)
+        srimgS = str("static/" + ("/".join(sr_sftgan_path.split("/")[1:])) + "/" + srSimage_name)
 
         lrpsnr = 0 #calpsnr(lrimg, lr_path)
         lrssim = 0 #calssim(lrimg, lr_path)
@@ -220,12 +216,12 @@ def nextimg(request):
     for indexnext, lrimage_name in enumerate(lrdir):
         if (indexnext == (indeximg + 1)):
             break;
-    lrimg = str("static/" + lr_path.split("/")[6] + "/" + lr_path.split("/")[7] + "/" + lr_path.split("/")[8] + "/" +lr_path.split("/")[9] + "/" + lrimage_name)
+    lrimg = str("static/" + ("/".join(lr_path.split("/")[1:])) + "/" + lrimage_name)
 
     for indexnext, hrimage_name in enumerate(hrdir):
         if (indexnext == indeximg + 1):
             break;
-    hrimg = str("static/" + hr_path.split("/")[6] + "/" + hr_path.split("/")[7] + "/" + hr_path.split("/")[8] + "/" +hr_path.split("/")[9] + "/" + hrimage_name)
+    hrimg = str("static/" + ("/".join(hr_path.split("/")[1:])) + "/" + hrimage_name)
 
     if len(os.listdir(sr_esrgan_path)and(os.listdir(sr_sftgan_path))and(os.listdir(sr_bicubic_path))) > 0:
         srres = 1
@@ -236,8 +232,7 @@ def nextimg(request):
         for indexnext, srEimage_name in enumerate(srdir_esrgan):
             if (indexnext == indeximg + 1):
                 break;
-        srimgE = str("static/" + sr_esrgan_path.split("/")[6] + "/" + sr_esrgan_path.split("/")[7] + "/" +
-                     sr_esrgan_path.split("/")[8] + "/" + sr_esrgan_path.split("/")[9] +"/"+ sr_esrgan_path.split("/")[10] + "/" + srEimage_name)
+        srimgE = str("static/" + ("/".join(sr_esrgan_path.split("/")[1:])) + "/" + srEimage_name)
 
 
         srdir_bicubic = os.listdir(sr_bicubic_path)
@@ -245,8 +240,7 @@ def nextimg(request):
         for indexnext, srBimage_name in enumerate(srdir_bicubic):
             if (indexnext == indeximg + 1):
                 break;
-        srimgB = str("static/" + sr_bicubic_path.split("/")[6] + "/" + sr_bicubic_path.split("/")[7] + "/" +
-                     sr_bicubic_path.split("/")[8] + "/" + sr_bicubic_path.split("/")[9] +"/"+ sr_bicubic_path.split("/")[10] + "/" + srBimage_name)
+        srimgB = str("static/" + ("/".join(sr_bicubic_path.split("/")[1:])) + "/" + srBimage_name)
 
 
         srdir_sftgan = os.listdir(sr_sftgan_path)
@@ -254,8 +248,7 @@ def nextimg(request):
         for indexnext, srSimage_name in enumerate(srdir_sftgan):
             if (indexnext == indeximg + 1):
                 break;
-        srimgS = str("static/" + sr_sftgan_path.split("/")[6] + "/" + sr_sftgan_path.split("/")[7] + "/" +
-                     sr_sftgan_path.split("/")[8] + "/" + sr_sftgan_path.split("/")[9] +"/"+ sr_sftgan_path.split("/")[10] + "/" + srSimage_name)
+        srimgS = str("static/" + ("/".join(sr_sftgan_path.split("/")[1:])) + "/" + srSimage_name)
 
         lrpsnr = 0 #calpsnr(lrimg,lr_path)
         lrssim = 0 #calssim(lrimg,lr_path)
@@ -278,9 +271,9 @@ def applysr(request):
         print("SR images already present in folder")
         return render(request,'home.html')
 
-    gan_pth_path='/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/parameters/gan.pth'
-    psnr_pth_path='/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/parameters/psnr.pth'
-    interp_pth_path='/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/parameters/interp.pth'
+    gan_pth_path='Backend/ESRGAN/parameters/gan.pth'
+    psnr_pth_path='Backend/ESRGAN/parameters/psnr.pth'
+    interp_pth_path='Backend/ESRGAN/parameters/interp.pth'
     lr_dir=lr_path
     sr_esrgan_dir=sr_esrgan_path
     alpha=0.8
@@ -352,8 +345,8 @@ def nextpage(request):
     listsr = os.listdir(sr_esrgan_path)
     listsr.sort()
     count = len(list)
-    srpath = sr_esrgan_path.replace("/home/abhishek/Documents/SRwebapp/Backend","static")
-    lrpath=lr_path.replace("/home/abhishek/Documents/SRwebapp/Backend","static")
+    srpath = sr_esrgan_path.replace("Backend","static")
+    lrpath=lr_path.replace("Backend","static")
     sizesr = dirsize(sr_esrgan_path,'MB')
     sizelr = dirsize(lr_path,'MB')
     return render(request,'local.html',{'algorithm':"ESRGAN",'psnr':esrpsnr,'ssim':esrssim,'list':list,'count':count,
@@ -380,7 +373,7 @@ def transfer(request):
     list = os.listdir(lr_path)
     list.sort()
     count = len(list)
-    lrpath = lr_path.replace("/home/abhishek/Documents/SRwebapp/Backend", "static")
+    lrpath = lr_path.replace("Backend", "static")
     sizelr = dirsize(lr_path, 'MB')
     msg = msg
     hostname = socket.gethostname()
@@ -413,11 +406,11 @@ def localclient(request):
     ipadd = request.GET['ipaddr']
     user = request.GET['username']
 
-    net_img = "/home/abhishek/socket/sr"
+    net_img = "Backend/socket/sr"
     list = os.listdir(net_img)
     list.sort()
     count = len(list)
-    imgpath = net_img.replace("/home/abhishek/Documents/SRwebapp/Backend", "static")
+    imgpath = net_img.replace("Backend", "static")
     size = dirsize(net_img, 'MB')
 
     return render(request,"receive.html",{'usr':user,'ipad':ipadd,'list':list,'path':imgpath,'totimg':count,'size':size})
@@ -430,7 +423,7 @@ def sendtoclient(request):
     s = socket.socket()
     s.connect(("localhost", 4000))
     for index,image in enumerate(list):
-        f = open(f"/home/abhishek/Documents/SRwebapp/Backend/ESRGAN/datasets/TEST/lr/{image}", "rb")
+        f = open(f"Backend/ESRGAN/datasets/TEST/lr/{image}", "rb")
         l = f.read()
         while (l):
             s.send(l)
