@@ -13,6 +13,13 @@
 
     <link rel="stylesheet" type="text/css" href="static/css/style_new.css">
 
+    <script>
+        // Initialize Bootstrap Tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
 <title>BE PROJECT </title>
 </head>
 
@@ -22,7 +29,7 @@
 <div class="container">
 
     <div class="row" style="margin-bottom: 100px;">
-        <div class="dropdown col-md-3" style="padding-left:0;">
+        <div class="dropdown col-md-2" style="padding-left:0;">
             <button type="button" class="btn btn-lg btn-success outline view dropdown-toggle" data-toggle="dropdown">View</button>
                 <div class="dropdown-menu" style="margin-left:10px; margin-right:10px;">
                     <a class="dropdown-item" id="lrbtn" target="_blank" title="" href="file:///Backend/ESRGAN/datasets/TEST/lr/" >LR</a>
@@ -31,33 +38,19 @@
                 </div>
         </div>
 
-
-        <!--script>
-        var lr = prompt("Enter LR path");
-        var hr = prompt("Enter HR path");
-        var sr = prompt("Enter SR path");
-        document.getElementById("lrbtn").href = "file:///"+lr;
-        document.getElementById("hrbtn").href = "file:///"+hr;
-        document.getElementById("srbtn").href = "file:///"+sr;
-
-        document.getElementById("lrbtn").title = lr;
-        document.getElementById("hrbtn").title = hr;
-        document.getElementById("srbtn").title = sr;
-
-        document.getElementById("lrhid").value = lr;
-        document.getElementById("hrhid").value = hr;
-        document.getElementById("srhid").value = sr;
-        </script-->
+        <button type="button" class="btn btn-primary col-md-1" data-toggle="tooltip" data-placement="top" title="Click on Train to view Training Result">
+            View Info
+        </button>
 
         <div class="text-center col-md-6" >
            <h2><a style="color:white;" title="Image Super Resolution : GAN">IMAGE ENHANCING UTILITY</a></h2>
         </div>
 
-        <form class="text-right col-md-1" style="padding-right:0;" action="loadimg">
+        <form name="loadimages" class="text-right col-md-1" style="padding-right:0;" action="loadimg">
                 <input type="text" id="lrhid1" name="lrhid1" value="Backend/ESRGAN/datasets/TEST/lr/" hidden>
                 <input type="text" id="hrhid1" name="hrhid1" value="Backend/ESRGAN/datasets/TEST/hr/" hidden>
                 <input type="text" id="srhid1" name="srhid1" value="Backend/ESRGAN/datasets/TEST/sr/" hidden>
-                <button type="submit" class="btn btn-lg btn-success"><a>*</a></button>
+                <button type="submit" class="btn btn-lg btn-success"><a>Train</a></button>
         </form>
 
         <form class="text-right col-md-2" action="makelr">

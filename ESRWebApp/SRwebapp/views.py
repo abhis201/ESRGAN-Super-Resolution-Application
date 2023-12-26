@@ -13,8 +13,6 @@ import torch
 from Backend.Bicubic.bicupscale import *
 from Backend.SFTGAN.pytorch_test.test_sftgan import *
 import socket
-import shutil
-import sys
 
 
 hr_path = ''
