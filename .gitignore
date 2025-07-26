@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+*.sqlite3
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Django
+*.db
+*.sqlite3
+media/
+staticfiles/
+
+# Environment
+.env
+venv/
+ENV/
+.env.*
+
+# Node
+node_modules/
+
+# Misc
+*.bak
+*.swp
+*.swo
+
+# SFTGAN/ESRGAN model checkpoints
+*.pth
+*.pt
+*.h5
+*.ckpt
+
+# Temporary files
+*.tmp
+*.temp
